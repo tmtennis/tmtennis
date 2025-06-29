@@ -5,30 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Vitus Clausen | Developer Portfolio</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap');
+
     :root {
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 200%;
-      height: 200%;
-      background: linear-gradient(135deg, rgba(255,255,255,0.02) 25%, transparent 25%) -50px 0,
-                  linear-gradient(225deg, rgba(255,255,255,0.02) 25%, transparent 25%) -50px 0;
-      background-size: 100px 100px;
-      animation: moveBackground 60s linear infinite;
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    @keyframes moveBackground {
-      0% { transform: translate(0, 0); }
-      100% { transform: translate(-50px, -50px); }
-    }
-
-    body, .container, h1, h2, p, .project {
-      text-align: center;
-    }
       --bg-light-start: #eef2f3;
       --bg-light-end: #8e9eab;
       --text-light: #2c3e50;
@@ -40,7 +19,43 @@
       --primary-color: #4a90e2;
       --shadow-light: rgba(74, 144, 226, 0.2);
       --shadow-dark: rgba(0, 0, 0, 0.7);
-      --font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      --font-family: 'Space Grotesk', sans-serif;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(135deg, rgba(255,255,255,0.01) 25%, transparent 25%) -50px 0,
+                  linear-gradient(225deg, rgba(255,255,255,0.01) 25%, transparent 25%) -50px 0;
+      background-size: 100px 100px;
+      animation: moveBackground 60s linear infinite;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: url("https://grainy-gradients.vercel.app/noise.svg");
+      opacity: 0.04;
+      z-index: -1;
+      animation: floatNoise 30s infinite alternate;
+      pointer-events: none;
+    }
+
+    @keyframes floatNoise {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(-20px, -20px); }
+    }
+
+    @keyframes moveBackground {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(-50px, -50px); }
     }
 
     * {
@@ -49,7 +64,7 @@
 
     body {
       margin: 0;
-      padding: 3rem 2rem;
+      padding: 5rem 3rem;
       font-family: var(--font-family);
       font-weight: 500;
       background: linear-gradient(135deg, var(--bg-light-start), var(--bg-light-end));
@@ -61,6 +76,12 @@
       display: flex;
       justify-content: center;
       align-items: flex-start;
+      animation: fadeIn 1.5s ease forwards;
+      opacity: 0;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
     }
 
     .dark-mode {
@@ -77,17 +98,23 @@
     }
 
     h1 {
-      font-size: 3rem;
-      margin-bottom: 0.75rem;
+      font-size: 4rem;
+      margin-bottom: 1rem;
       font-weight: 700;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.06em;
       line-height: 1.1;
       color: inherit;
-      text-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      text-shadow: 0 0 8px rgba(74,144,226,0.6), 0 0 14px rgba(74,144,226,0.4);
+      animation: flicker 3s infinite alternate ease-in-out;
+    }
+
+    @keyframes flicker {
+      0% { text-shadow: 0 0 6px rgba(74,144,226,0.4); }
+      100% { text-shadow: 0 0 14px rgba(74,144,226,0.9); }
     }
 
     h2 {
-      margin-top: 3.5rem;
+      margin-top: 4.5rem;
       font-size: 1.75rem;
       border-bottom: 2px solid var(--primary-color);
       padding-bottom: 0.4rem;
@@ -99,7 +126,7 @@
 
     .intro {
       font-size: 1.2rem;
-      margin-bottom: 2.5rem;
+      margin-bottom: 3rem;
       font-weight: 400;
       color: inherit;
       max-width: 700px;
@@ -108,14 +135,15 @@
 
     .project {
       margin-bottom: 3rem;
-      background: var(--card-light);
-      padding: 2rem 2.5rem;
-      border-radius: 16px;
+      background: rgba(255,255,255,0.06);
+      backdrop-filter: blur(10px);
+      padding: 2.5rem;
+      border-radius: 20px;
       box-shadow: 0 12px 24px var(--shadow-light);
-      transition: transform 0.3s cubic-bezier(0.4,0,0.2,1), box-shadow 0.3s ease, background-color 0.4s ease;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
       font-weight: 500;
       color: var(--text-light);
-      cursor: default;
+      cursor: pointer;
     }
 
     .dark-mode .project {
@@ -125,12 +153,13 @@
     }
 
     .project:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 20px 40px var(--shadow-light);
+      transform: rotateZ(-1deg) scale(1.015);
+      box-shadow: 0 25px 45px rgba(0,0,0,0.2);
     }
 
     .dark-mode .project:hover {
       box-shadow: 0 20px 45px var(--shadow-dark);
+      transform: rotateZ(-1deg) scale(1.015);
     }
 
     .project h3 {
