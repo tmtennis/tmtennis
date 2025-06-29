@@ -156,17 +156,21 @@
       position: fixed;
       top: 1.25rem;
       right: 1.25rem;
+      width: 40px;
+      height: 40px;
+      font-size: 1.25rem;
+      line-height: 1;
       background: #ffffffcc;
       border: none;
-      padding: 0.6rem 1.2rem;
-      border-radius: 30px;
+      border-radius: 50%;
       cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-weight: 600;
       font-family: var(--font-family);
       box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
       color: var(--primary-color);
-      font-size: 1rem;
-      letter-spacing: 0.03em;
       transition: background 0.4s ease, color 0.4s ease, box-shadow 0.4s ease;
       user-select: none;
       backdrop-filter: blur(10px);
@@ -192,7 +196,7 @@
   </style>
 </head>
 <body>
-  <button class="toggle-btn" onclick="toggleDarkMode()">Toggle Dark Mode</button>
+  <button class="toggle-btn" id="modeToggle" onclick="toggleDarkMode()">🌙</button>
 
   <div class="container">
     <h1>Vitus Clausen — Developer</h1>
@@ -231,7 +235,10 @@
 
   <script>
     function toggleDarkMode() {
-      document.body.classList.toggle('dark-mode');
+      const body = document.body;
+      const toggleBtn = document.getElementById('modeToggle');
+      body.classList.toggle('dark-mode');
+      toggleBtn.textContent = body.classList.contains('dark-mode') ? '☀️' : '🌙';
     }
   </script>
 </body>
