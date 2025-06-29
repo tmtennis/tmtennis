@@ -6,6 +6,29 @@
   <title>Vitus Clausen | Developer Portfolio</title>
   <style>
     :root {
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(135deg, rgba(255,255,255,0.02) 25%, transparent 25%) -50px 0,
+                  linear-gradient(225deg, rgba(255,255,255,0.02) 25%, transparent 25%) -50px 0;
+      background-size: 100px 100px;
+      animation: moveBackground 60s linear infinite;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    @keyframes moveBackground {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(-50px, -50px); }
+    }
+
+    body, .container, h1, h2, p, .project {
+      text-align: center;
+    }
       --bg-light-start: #eef2f3;
       --bg-light-end: #8e9eab;
       --text-light: #2c3e50;
@@ -199,26 +222,26 @@
   <button class="toggle-btn" id="modeToggle" onclick="toggleDarkMode()">🌙</button>
 
   <div class="container">
-    <h1>Vitus Clausen — Developer</h1>
+    <h1>Vitus Clausen</h1>
     <p class="intro">I build clean, fast, and thoughtful digital experiences — from front-end UI to backend logic. I'm focused on React Native, Firebase, REST APIs, and expressive visual tools like Framer. My work blends data, code, and design to create things that actually work (and look good doing it).</p>
 
     <h2>Projects</h2>
 
     <div class="project">
       <h3>TennisMenace</h3>
-      <p>A full-stack platform for serious tennis bettors. Includes player form analysis, Menace Index scoring, ATP/WTA tracking, and a sharp front-end built in Framer, backed by Firebase.</p>
+      <p>A full-stack platform for serious tennis bettors. Includes player form analysis, Menace Index scoring, ATP/WTA tracking, and a responsive front-end built entirely with custom HTML &amp; CSS — no frameworks, just pure layout precision.</p>
       <a href="https://tmtennis.blog" target="_blank">Visit the TM Blog</a>
     </div>
 
     <div class="project">
-      <h3>Wimbledon Scraper</h3>
+      <h3>ATP Tour Scraper</h3>
       <p>Python + BeautifulSoup script that scrapes live forecasts from Tennis Abstract and outputs JSON files for use in custom dashboards. Modular, fast, and CLI-friendly.</p>
       <a href="#">GitHub repo (private for now)</a>
     </div>
 
     <div class="project">
-      <h3>TM Premium UI</h3>
-      <p>High-contrast premium section with glowing confidence meter, animated blur previews, and tight vertical layout. All built with hand-tuned HTML/CSS for maximum control and performance.</p>
+      <h3>Framer Templates</h3>
+      <p>A collection of refined, modular Framer templates designed to help designers move fast without sacrificing expression. Built with conversion, clarity, and micro-interaction logic baked into every component.</p>
       <a href="#">Preview coming soon</a>
     </div>
 
