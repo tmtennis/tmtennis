@@ -5,6 +5,350 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Vitus Clausen | Developer Portfolio</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Helvetica:wght@700&display=swap');
+
+    :root {
+      --court-green-start: #2a7a27;
+      --court-green-end: #1e5e1e;
+      --net-white: rgba(255, 255, 255, 0.15);
+      --scoreboard-bg: #004d00;
+      --scoreboard-border: #aaff00;
+      --scoreboard-text: #e6ff00;
+      --player-box-bg: #1a4d1a;
+      --player-box-border: #ccff33;
+      --player-box-text: #ccff33;
+      --primary-color: #ccff33;
+      --shadow-light: rgba(204, 255, 51, 0.4);
+      --shadow-dark: rgba(0, 0, 0, 0.7);
+      --font-family: 'Helvetica', sans-serif;
+      --font-header: 'Helvetica', sans-serif;
+      --day-bg-gradient: linear-gradient(135deg, var(--court-green-start), var(--court-green-end));
+      --night-bg-gradient: linear-gradient(135deg, #0a2a0a, #053005);
+      --net-texture: repeating-linear-gradient(
+        45deg,
+        var(--net-white) 0,
+        var(--net-white) 1px,
+        transparent 2px,
+        transparent 6px
+      );
+      --ball-color: #e6ff00;
+      --ball-shadow: rgba(230, 255, 0, 0.7);
+      --ticker-bg-day: #003300;
+      --ticker-bg-night: #001a00;
+      --ticker-text-day: #ccff33;
+      --ticker-text-night: #99cc00;
+    }
+
+    /* Reset and base */
+    * {
+      box-sizing: border-box;
+      user-select: none;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: var(--font-family);
+      background: var(--day-bg-gradient);
+      background-image: var(--day-bg-gradient);
+      background-repeat: repeat;
+      background-size: auto;
+      color: var(--primary-color);
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: background 0.5s ease, color 0.5s ease;
+      position: relative;
+    }
+
+    .dark-mode {
+      background: var(--night-bg-gradient);
+      background-image: var(--night-bg-gradient);
+      color: var(--ticker-text-night);
+    }
+
+
+
+    /* Net across middle */
+    .net {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      width: 4px;
+      height: 100vh;
+      background: repeating-linear-gradient(
+        to bottom,
+        var(--net-white),
+        var(--net-white) 4px,
+        transparent 4px,
+        transparent 8px
+      );
+      z-index: 1;
+      pointer-events: none;
+      filter: drop-shadow(0 0 2px rgba(255,255,255,0.2));
+    }
+
+    /* Left and right court sides */
+    .court-side {
+      position: fixed;
+      top: 40px;
+      bottom: 48px;
+      width: 50%;
+      overflow-y: auto;
+      padding: 1rem 2rem 2rem 2rem;
+      box-sizing: border-box;
+      font-size: 1rem;
+      z-index: 5;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      scroll-behavior: smooth;
+    }
+    .left-side {
+      left: 0;
+      border-right: 2px solid var(--net-white);
+    }
+    .right-side {
+      right: 0;
+      border-left: 2px solid var(--net-white);
+    }
+
+    /* Scoreboard style (replacing windows) */
+    .scoreboard {
+      background: var(--scoreboard-bg);
+      border: 3px solid var(--scoreboard-border);
+      border-radius: 12px;
+      box-shadow: 0 0 15px var(--shadow-light);
+      font-family: var(--font-header);
+      color: var(--scoreboard-text);
+      padding: 1rem 1.5rem;
+      user-select: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      min-width: 320px;
+      max-width: 480px;
+      max-height: 60vh;
+      overflow-y: auto;
+    }
+    .scoreboard h2, .scoreboard h3 {
+      margin: 0;
+      font-weight: 700;
+    }
+    .scoreboard p, .scoreboard a {
+      font-family: var(--font-family);
+      font-weight: 600;
+      color: var(--scoreboard-text);
+      margin: 0.3rem 0 1rem 0;
+      text-decoration: none;
+    }
+    .scoreboard a:hover {
+      text-decoration: underline;
+      color: #ccff33;
+    }
+
+    /* Player boxes for smaller info blocks */
+    .player-box {
+      background: var(--player-box-bg);
+      border: 2px solid var(--player-box-border);
+      border-radius: 10px;
+      padding: 0.75rem 1rem;
+      font-family: var(--font-header);
+      color: var(--player-box-text);
+      user-select: none;
+      box-shadow: 0 0 10px var(--shadow-light);
+    }
+    .player-box h3 {
+      margin: 0 0 0.25rem 0;
+      font-weight: 700;
+    }
+    .player-box p, .player-box a {
+      font-family: var(--font-family);
+      font-weight: 600;
+      margin: 0.2rem 0 0.75rem 0;
+      color: var(--player-box-text);
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+    .player-box a:hover {
+      text-decoration: underline;
+      color: #ccff33;
+    }
+
+    /* Stadium scoreboard ticker (menu-bar and taskbar) */
+    .menu-bar, .taskbar {
+      font-family: var(--font-header);
+      background: var(--ticker-bg-day);
+      color: var(--ticker-text-day);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      padding: 0 1.5rem;
+      user-select: none;
+      box-shadow: inset 0 0 10px #aaff00;
+      z-index: 10;
+      transition: background 0.5s ease, color 0.5s ease;
+    }
+    .dark-mode .menu-bar, .dark-mode .taskbar {
+      background: var(--ticker-bg-night);
+      color: var(--ticker-text-night);
+      box-shadow: inset 0 0 10px #99cc00;
+    }
+
+    .menu-bar {
+      height: 40px;
+      justify-content: flex-end;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+    }
+    .taskbar {
+      height: 48px;
+      justify-content: flex-start;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      gap: 1rem;
+    }
+
+    /* Tennis ball toggle button */
+    .toggle-btn {
+      width: 36px;
+      height: 36px;
+      background: var(--ball-color);
+      border-radius: 50%;
+      border: 2px solid var(--primary-color);
+      box-shadow: 0 0 8px var(--ball-shadow);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      user-select: none;
+      transition: background 0.4s ease, box-shadow 0.4s ease;
+      color: var(--scoreboard-bg);
+      font-weight: 700;
+      line-height: 1;
+      position: relative;
+    }
+
+    /* Taskbar icons styled as ticker items */
+    .taskbar-icon {
+      background: transparent;
+      border: none;
+      color: inherit;
+      font-family: var(--font-header);
+      font-weight: 700;
+      font-size: 1.1rem;
+      cursor: pointer;
+      padding: 0.2rem 0.5rem;
+      border-radius: 6px;
+      user-select: none;
+      transition: background 0.3s ease;
+    }
+    .taskbar-icon:hover {
+      background: var(--primary-color);
+      color: #004d00;
+      box-shadow: 0 0 10px var(--primary-color);
+    }
+
+
+  </style>
+</head>
+<body>
+  <div class="menu-bar">
+    <button class="toggle-btn" id="modeToggle" aria-label="Toggle day/night court"></button>
+  </div>
+
+  <div class="net"></div>
+
+  <div class="court-side left-side" id="leftSide">
+    <div class="scoreboard" id="scoreboard-about">
+      <h2>About</h2>
+      <p>I build clean, fast, and thoughtful digital experiences — from front-end UI to backend logic. I'm focused on React Native, Firebase, REST APIs, and expressive visual tools like Framer. My work blends data, code, and design to create things that actually work (and look good doing it).</p>
+    </div>
+    <div class="player-box" id="player-contact">
+      <h3>Contact</h3>
+      <p>Email: your@email.com<br>
+      LinkedIn: <a href="#" tabindex="-1">your LinkedIn</a><br>
+      GitHub: <a href="#" tabindex="-1">your GitHub</a></p>
+      <div style="margin-top: 0.5rem; font-size: 0.75rem; opacity: 0.75;">© 2025 Vitus Clausen</div>
+    </div>
+  </div>
+
+  <div class="court-side right-side" id="rightSide">
+    <div class="scoreboard" id="scoreboard-projects">
+      <h2>Projects</h2>
+      <div class="player-box">
+        <h3>TennisMenace</h3>
+        <p>A full-stack platform for serious tennis bettors. Includes player form analysis, Menace Index scoring, ATP/WTA tracking, and a responsive front-end built entirely with custom HTML &amp; CSS — no frameworks, just pure layout precision.</p>
+        <a href="https://tmtennis.blog" target="_blank" rel="noopener noreferrer">Visit the TM Blog</a>
+      </div>
+      <div class="player-box">
+        <h3>ATP Tour Scraper</h3>
+        <p>Python + BeautifulSoup script that scrapes live forecasts from Tennis Abstract and outputs JSON files for use in custom dashboards. Modular, fast, and CLI-friendly.</p>
+        <a href="#" tabindex="-1">GitHub repo (private for now)</a>
+      </div>
+      <div class="player-box">
+        <h3>Framer Templates</h3>
+        <p>A collection of refined, modular Framer templates designed to help designers move fast without sacrificing expression. Built with conversion, clarity, and micro-interaction logic baked into every component.</p>
+        <a href="#" tabindex="-1">Preview coming soon</a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="taskbar">
+    <button class="taskbar-icon" data-window="scoreboard-projects" title="Projects">PRJ</button>
+    <button class="taskbar-icon" data-window="scoreboard-about" title="About">ABT</button>
+  </div>
+
+
+  <!-- Tennis balls bouncing in background -->
+  <div class="tennis-ball" style="top: 20vh; left: 15vw; animation: bounce1 3s infinite;"></div>
+  <div class="tennis-ball" style="top: 50vh; left: 40vw; animation: bounce2 2.5s infinite 0.5s;"></div>
+  <div class="tennis-ball" style="top: 70vh; left: 75vw; animation: bounce3 3.2s infinite 1s;"></div>
+  <div class="tennis-ball" style="top: 35vh; left: 85vw; animation: bounce1 2.8s infinite 1.5s;"></div>
+  <div class="tennis-ball" style="top: 60vh; left: 25vw; animation: bounce2 3.5s infinite 2s;"></div>
+
+  <script>
+    // Dark mode toggle with tennis ball/sun icon
+    const toggleBtn = document.getElementById('modeToggle');
+    function toggleDarkMode() {
+      const body = document.body;
+      body.classList.toggle('dark-mode');
+      toggleBtn.classList.toggle('dark');
+    }
+    toggleBtn.addEventListener('click', toggleDarkMode);
+
+    // Taskbar icon click to toggle scoreboard visibility
+    const taskbarIcons = document.querySelectorAll('.taskbar-icon');
+    taskbarIcons.forEach(icon => {
+      icon.addEventListener('click', () => {
+        const windowId = icon.getAttribute('data-window');
+        const win = document.getElementById(windowId);
+        if (win.style.display === 'none' || getComputedStyle(win).display === 'none') {
+          win.style.display = 'flex';
+          win.scrollIntoView({behavior: "smooth"});
+        } else {
+          win.style.display = 'none';
+        }
+      });
+    });
+  </script>
+</body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Vitus Clausen | Developer Portfolio</title>
+  <style>
     @import url('https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Syne:wght@600;700;800&display=swap');
 
     :root {
@@ -309,56 +653,6 @@
       box-shadow: 0 0 10px var(--primary-color);
     }
 
-    /* Bouncing tennis ball mascot in bottom-right */
-    .tennis-mascot {
-      position: fixed;
-      bottom: 16px;
-      right: 16px;
-      width: 60px;
-      height: 60px;
-      background: var(--ball-color);
-      border-radius: 50%;
-      box-shadow: 0 0 12px var(--ball-shadow);
-      cursor: default;
-      user-select: none;
-      animation: mascotBounce 2.5s ease-in-out infinite;
-      z-index: 1002;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2.5rem;
-      color: var(--scoreboard-bg);
-      font-weight: 700;
-      font-family: var(--font-header);
-    }
-    @keyframes mascotBounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-20px); }
-    }
-
-    /* Tooltip for mascot */
-    .tooltip {
-      position: fixed;
-      bottom: 90px;
-      right: 16px;
-      background: rgba(0,0,0,0.75);
-      color: white;
-      padding: 8px 14px;
-      border-radius: 8px;
-      font-size: 0.9rem;
-      max-width: 220px;
-      text-align: center;
-      pointer-events: none;
-      user-select: none;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      z-index: 1003;
-      font-family: var(--font-family);
-      box-shadow: 0 0 10px rgba(0,0,0,0.5);
-    }
-    .tooltip.visible {
-      opacity: 1;
-    }
 
   </style>
 </head>
@@ -402,33 +696,14 @@
         <a href="#" tabindex="-1">Preview coming soon</a>
       </div>
     </div>
-
-    <div class="scoreboard" id="scoreboard-terminal" style="margin-top: 1rem; font-family: monospace, var(--font-family); background: #003300; color: #ccff33;">
-      <h2>Terminal</h2>
-      <div style="overflow-y: auto; max-height: 180px; font-family: monospace; font-weight: 600; line-height: 1.4;">
-        <p>Welcome to Vitus Clausen's dev terminal.</p>
-        <p>$ echo "Hello, world!"</p>
-        <p>Hello, world!</p>
-        <p>$ # This is a placeholder terminal window.</p>
-      </div>
-    </div>
   </div>
 
   <div class="taskbar">
     <button class="taskbar-icon" data-window="scoreboard-projects" title="Projects">PRJ</button>
-    <button class="taskbar-icon" data-window="scoreboard-terminal" title="Terminal">TER</button>
     <button class="taskbar-icon" data-window="scoreboard-about" title="About">ABT</button>
   </div>
 
-  <div class="tennis-mascot" id="tennisMascot" aria-label="Tennis ball mascot">🎾</div>
-  <div class="tooltip" id="mascotTooltip" role="tooltip"></div>
 
-  <!-- Tennis balls bouncing in background -->
-  <div class="tennis-ball" style="top: 20vh; left: 15vw; animation: bounce1 3s infinite;"></div>
-  <div class="tennis-ball" style="top: 50vh; left: 40vw; animation: bounce2 2.5s infinite 0.5s;"></div>
-  <div class="tennis-ball" style="top: 70vh; left: 75vw; animation: bounce3 3.2s infinite 1s;"></div>
-  <div class="tennis-ball" style="top: 35vh; left: 85vw; animation: bounce1 2.8s infinite 1.5s;"></div>
-  <div class="tennis-ball" style="top: 60vh; left: 25vw; animation: bounce2 3.5s infinite 2s;"></div>
 
   <script>
     // Dark mode toggle with tennis ball/sun icon
@@ -454,48 +729,6 @@
         }
       });
     });
-
-    // Mascot tooltip messages cycling
-    const mascot = document.getElementById('tennisMascot');
-    const tooltip = document.getElementById('mascotTooltip');
-    const messages = [
-      "Keep your eye on the code. 🎾",
-      "Did you know? React Native powers many apps!",
-      "Tip: Use meaningful commit messages.",
-      "Fun fact: Tennis balls are yellow for visibility!",
-      "Stay curious and keep learning.",
-      "Need help? Check out the docs!",
-      "Debugging is like being a detective.",
-      "Remember to take breaks!",
-      "Coffee fuels great code.",
-      "Happy coding from Vitus!"
-    ];
-    let msgIndex = 0;
-    let tooltipTimeout;
-
-    function showTooltip() {
-      tooltip.textContent = messages[msgIndex];
-      tooltip.classList.add('visible');
-      clearTimeout(tooltipTimeout);
-      tooltipTimeout = setTimeout(() => {
-        tooltip.classList.remove('visible');
-      }, 4000);
-      msgIndex = (msgIndex + 1) % messages.length;
-    }
-
-    mascot.addEventListener('mouseenter', () => {
-      clearTimeout(tooltipTimeout);
-      tooltip.classList.add('visible');
-      tooltip.textContent = messages[msgIndex];
-    });
-    mascot.addEventListener('mouseleave', () => {
-      tooltip.classList.remove('visible');
-    });
-
-    // Show tooltip every 6 seconds
-    showTooltip();
-    setInterval(showTooltip, 6000);
-
   </script>
 </body>
 </html>
