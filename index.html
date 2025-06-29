@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Vitus Clausen | Developer Portfolio</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Syne:wght@600;700;800&display=swap');
 
     :root {
       --bg-light-start: #eef2f3;
@@ -19,69 +19,35 @@
       --primary-color: #4a90e2;
       --shadow-light: rgba(74, 144, 226, 0.2);
       --shadow-dark: rgba(0, 0, 0, 0.7);
-      --font-family: 'Space Grotesk', sans-serif;
+      --font-family: 'Syne', sans-serif;
+      --font-header: 'Major Mono Display', monospace;
+      --window-bg-light: #f0f0f0;
+      --window-bg-dark: #2a2f45;
+      --window-border-light: #999;
+      --window-border-dark: #444;
+      --menu-bar-bg-light: #e0e0e0;
+      --menu-bar-bg-dark: #1a1f2e;
+      --taskbar-bg-light: #dcdcdc;
+      --taskbar-bg-dark: #1c2541;
     }
 
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 200%;
-      height: 200%;
-      background: linear-gradient(135deg, rgba(255,255,255,0.01) 25%, transparent 25%) -50px 0,
-                  linear-gradient(225deg, rgba(255,255,255,0.01) 25%, transparent 25%) -50px 0;
-      background-size: 100px 100px;
-      animation: moveBackground 60s linear infinite;
-      z-index: -1;
-      pointer-events: none;
-    }
-
-    body::after {
-      content: "";
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: url("https://grainy-gradients.vercel.app/noise.svg");
-      opacity: 0.04;
-      z-index: -1;
-      animation: floatNoise 30s infinite alternate;
-      pointer-events: none;
-    }
-
-    @keyframes floatNoise {
-      0% { transform: translate(0, 0); }
-      100% { transform: translate(-20px, -20px); }
-    }
-
-    @keyframes moveBackground {
-      0% { transform: translate(0, 0); }
-      100% { transform: translate(-50px, -50px); }
-    }
-
+    /* Reset and base */
     * {
       box-sizing: border-box;
+      user-select: none;
     }
 
     body {
       margin: 0;
-      padding: 5rem 3rem;
+      padding: 0;
       font-family: var(--font-family);
-      font-weight: 500;
       background: linear-gradient(135deg, var(--bg-light-start), var(--bg-light-end));
       color: var(--text-light);
-      line-height: 1.75;
-      letter-spacing: 0.02em;
-      transition: background 0.5s ease, color 0.5s ease;
-      min-height: 100vh;
+      height: 100vh;
+      overflow: hidden;
       display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      animation: fadeIn 1.5s ease forwards;
-      opacity: 0;
-    }
-
-    @keyframes fadeIn {
-      to { opacity: 1; }
+      flex-direction: column;
+      transition: background 0.5s ease, color 0.5s ease;
     }
 
     .dark-mode {
@@ -89,127 +55,30 @@
       color: var(--text-dark);
     }
 
-    .container {
-      max-width: 850px;
-      width: 100%;
-      font-family: var(--font-family);
-      font-weight: 500;
-      padding: 0 1rem;
-    }
-
-    h1 {
-      font-size: 4rem;
-      margin-bottom: 1rem;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      line-height: 1.1;
-      color: inherit;
-      text-shadow: 0 0 8px rgba(74,144,226,0.6), 0 0 14px rgba(74,144,226,0.4);
-      animation: flicker 3s infinite alternate ease-in-out;
-    }
-
-    @keyframes flicker {
-      0% { text-shadow: 0 0 6px rgba(74,144,226,0.4); }
-      100% { text-shadow: 0 0 14px rgba(74,144,226,0.9); }
-    }
-
-    h2 {
-      margin-top: 4.5rem;
-      font-size: 1.75rem;
-      border-bottom: 2px solid var(--primary-color);
-      padding-bottom: 0.4rem;
-      font-weight: 700;
-      letter-spacing: 0.03em;
-      color: inherit;
-      transition: border-color 0.3s ease;
-    }
-
-    .intro {
-      font-size: 1.2rem;
-      margin-bottom: 3rem;
-      font-weight: 400;
-      color: inherit;
-      max-width: 700px;
-      line-height: 1.8;
-    }
-
-    .project {
-      margin-bottom: 3rem;
-      background: rgba(255,255,255,0.06);
-      backdrop-filter: blur(10px);
-      padding: 2.5rem;
-      border-radius: 20px;
-      box-shadow: 0 12px 24px var(--shadow-light);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      font-weight: 500;
-      color: var(--text-light);
-      cursor: pointer;
-    }
-
-    .dark-mode .project {
-      background: var(--card-dark);
-      box-shadow: 0 12px 30px var(--shadow-dark);
-      color: var(--text-dark);
-    }
-
-    .project:hover {
-      transform: rotateZ(-1deg) scale(1.015);
-      box-shadow: 0 25px 45px rgba(0,0,0,0.2);
-    }
-
-    .dark-mode .project:hover {
-      box-shadow: 0 20px 45px var(--shadow-dark);
-      transform: rotateZ(-1deg) scale(1.015);
-    }
-
-    .project h3 {
-      margin-top: 0;
-      font-size: 1.4rem;
-      font-weight: 700;
-      color: inherit;
-      letter-spacing: 0.02em;
-      margin-bottom: 0.6rem;
-      user-select: none;
-    }
-
-    .project p {
-      margin: 0.6rem 0 1.2rem;
-      font-weight: 400;
-      font-size: 1rem;
-      color: inherit;
-      line-height: 1.6;
-    }
-
-    a {
-      color: var(--primary-color);
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 1rem;
-      margin-right: 1.5rem;
-      transition: color 0.3s ease;
-    }
-
-    a:hover {
-      text-decoration: underline;
-      color: #357ABD;
-    }
-
-    .footer {
-      margin-top: 4rem;
-      font-size: 0.95rem;
-      opacity: 0.75;
-      font-weight: 400;
-      color: inherit;
-      text-align: center;
-      user-select: none;
-    }
-
-    .toggle-btn {
-      position: fixed;
-      top: 1.25rem;
-      right: 1.25rem;
-      width: 40px;
+    /* Menu bar at top */
+    .menu-bar {
       height: 40px;
+      background: var(--menu-bar-bg-light);
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      padding: 0 1rem;
+      box-shadow: inset 0 -1px 0 #bbb;
+      user-select: none;
+      position: relative;
+      z-index: 1000;
+      transition: background 0.5s ease;
+    }
+
+    .dark-mode .menu-bar {
+      background: var(--menu-bar-bg-dark);
+      box-shadow: inset 0 -1px 0 #444;
+    }
+
+    /* Dark mode toggle button */
+    .toggle-btn {
+      width: 36px;
+      height: 36px;
       font-size: 1.25rem;
       line-height: 1;
       background: #ffffffcc;
@@ -245,53 +114,353 @@
       color: white;
       box-shadow: 0 6px 22px rgba(74, 144, 226, 0.8);
     }
+
+    /* Desktop area */
+    .desktop {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+      background: inherit;
+    }
+
+    /* Taskbar at bottom */
+    .taskbar {
+      height: 48px;
+      background: var(--taskbar-bg-light);
+      display: flex;
+      align-items: center;
+      padding: 0 1rem;
+      box-shadow: inset 0 1px 0 #bbb;
+      user-select: none;
+      z-index: 1000;
+      transition: background 0.5s ease;
+    }
+
+    .dark-mode .taskbar {
+      background: var(--taskbar-bg-dark);
+      box-shadow: inset 0 1px 0 #444;
+    }
+
+    .taskbar-icon {
+      width: 36px;
+      height: 36px;
+      margin-right: 1rem;
+      background: var(--primary-color);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 700;
+      font-family: var(--font-header);
+      font-size: 1rem;
+      cursor: default;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+      user-select: none;
+      transition: background 0.3s ease;
+    }
+
+    .taskbar-icon:hover {
+      background: #357ABD;
+    }
+
+    /* Window style */
+    .window {
+      position: absolute;
+      background: var(--window-bg-light);
+      border: 2px solid var(--window-border-light);
+      border-radius: 6px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      min-width: 320px;
+      max-width: 480px;
+      max-height: 80vh;
+      display: flex;
+      flex-direction: column;
+      transition: background 0.5s ease, border-color 0.5s ease;
+      user-select: none;
+      overflow: hidden;
+      z-index: 10;
+    }
+
+    .dark-mode .window {
+      background: var(--window-bg-dark);
+      border-color: var(--window-border-dark);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.7);
+      color: var(--text-dark);
+    }
+
+    /* Window title bar */
+    .window-header {
+      background: var(--primary-color);
+      color: white;
+      padding: 0.4rem 1rem;
+      font-weight: 700;
+      font-family: var(--font-header);
+      font-size: 1.25rem;
+      cursor: grab;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      user-select: none;
+    }
+
+    .window-header:active {
+      cursor: grabbing;
+    }
+
+    /* Window content */
+    .window-content {
+      padding: 1rem;
+      overflow: auto;
+      flex: 1;
+      font-weight: 500;
+      font-size: 1rem;
+      line-height: 1.5;
+      color: inherit;
+    }
+
+    .window-content p {
+      margin-top: 0;
+      margin-bottom: 1rem;
+    }
+
+    .window-content a {
+      color: var(--primary-color);
+      text-decoration: none;
+      font-weight: 600;
+      margin-right: 1rem;
+      transition: color 0.3s ease;
+    }
+
+    .window-content a:hover {
+      text-decoration: underline;
+      color: #357ABD;
+    }
+
+    /* Scrollbar styling */
+    .window-content::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .window-content::-webkit-scrollbar-thumb {
+      background: var(--primary-color);
+      border-radius: 4px;
+    }
+
+    /* Monkey mascot */
+    .monkey-mascot {
+      position: fixed;
+      bottom: 16px;
+      right: 16px;
+      width: 80px;
+      height: 80px;
+      background: url('https://cdn-icons-png.flaticon.com/512/616/616408.png') no-repeat center/contain;
+      cursor: default;
+      user-select: none;
+      z-index: 1001;
+    }
+
+    .tooltip {
+      position: fixed;
+      bottom: 110px;
+      right: 16px;
+      background: rgba(0,0,0,0.75);
+      color: white;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      max-width: 220px;
+      text-align: center;
+      pointer-events: none;
+      user-select: none;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: 1002;
+    }
+
+    .tooltip.visible {
+      opacity: 1;
+    }
   </style>
 </head>
 <body>
-  <button class="toggle-btn" id="modeToggle" onclick="toggleDarkMode()">🌙</button>
-
-  <div class="container">
-    <h1>Vitus Clausen</h1>
-    <p class="intro">I build clean, fast, and thoughtful digital experiences — from front-end UI to backend logic. I'm focused on React Native, Firebase, REST APIs, and expressive visual tools like Framer. My work blends data, code, and design to create things that actually work (and look good doing it).</p>
-
-    <h2>Projects</h2>
-
-    <div class="project">
-      <h3>TennisMenace</h3>
-      <p>A full-stack platform for serious tennis bettors. Includes player form analysis, Menace Index scoring, ATP/WTA tracking, and a responsive front-end built entirely with custom HTML &amp; CSS — no frameworks, just pure layout precision.</p>
-      <a href="https://tmtennis.blog" target="_blank">Visit the TM Blog</a>
-    </div>
-
-    <div class="project">
-      <h3>ATP Tour Scraper</h3>
-      <p>Python + BeautifulSoup script that scrapes live forecasts from Tennis Abstract and outputs JSON files for use in custom dashboards. Modular, fast, and CLI-friendly.</p>
-      <a href="#">GitHub repo (private for now)</a>
-    </div>
-
-    <div class="project">
-      <h3>Framer Templates</h3>
-      <p>A collection of refined, modular Framer templates designed to help designers move fast without sacrificing expression. Built with conversion, clarity, and micro-interaction logic baked into every component.</p>
-      <a href="#">Preview coming soon</a>
-    </div>
-
-    <h2>Tech Stack</h2>
-    <p>React Native, Firebase, HTML/CSS, Framer, REST APIs, Python, Git, Shopify, BeautifulSoup</p>
-
-    <h2>Contact</h2>
-    <p>Email: your@email.com<br>
-    LinkedIn: <a href="#">your LinkedIn</a><br>
-    GitHub: <a href="#">your GitHub</a></p>
-
-    <div class="footer">© 2025 Vitus Clausen</div>
+  <div class="menu-bar">
+    <button class="toggle-btn" id="modeToggle" aria-label="Toggle dark mode">🌙</button>
   </div>
 
+  <div class="desktop" id="desktop">
+    <!-- Windows will be here -->
+    <div class="window" id="window-projects" style="top: 60px; left: 60px; z-index: 20;">
+      <div class="window-header">Projects</div>
+      <div class="window-content">
+        <div>
+          <h3>TennisMenace</h3>
+          <p>A full-stack platform for serious tennis bettors. Includes player form analysis, Menace Index scoring, ATP/WTA tracking, and a responsive front-end built entirely with custom HTML &amp; CSS — no frameworks, just pure layout precision.</p>
+          <a href="https://tmtennis.blog" target="_blank" rel="noopener noreferrer">Visit the TM Blog</a>
+        </div>
+        <div>
+          <h3>ATP Tour Scraper</h3>
+          <p>Python + BeautifulSoup script that scrapes live forecasts from Tennis Abstract and outputs JSON files for use in custom dashboards. Modular, fast, and CLI-friendly.</p>
+          <a href="#" tabindex="-1">GitHub repo (private for now)</a>
+        </div>
+        <div>
+          <h3>Framer Templates</h3>
+          <p>A collection of refined, modular Framer templates designed to help designers move fast without sacrificing expression. Built with conversion, clarity, and micro-interaction logic baked into every component.</p>
+          <a href="#" tabindex="-1">Preview coming soon</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="window" id="window-terminal" style="top: 120px; left: 420px; width: 400px; height: 300px; z-index: 19;">
+      <div class="window-header">Terminal</div>
+      <div class="window-content" style="font-family: monospace; background: #000; color: #0f0; height: 100%; overflow-y: auto;">
+        <p>Welcome to Vitus Clausen's dev terminal.</p>
+        <p>$ echo "Hello, world!"</p>
+        <p>Hello, world!</p>
+        <p>$ # This is a placeholder terminal window.</p>
+      </div>
+    </div>
+
+    <div class="window" id="window-about" style="top: 220px; left: 180px; width: 380px; height: 240px; z-index: 18;">
+      <div class="window-header">About</div>
+      <div class="window-content">
+        <h2>Vitus Clausen</h2>
+        <p>I build clean, fast, and thoughtful digital experiences — from front-end UI to backend logic. I'm focused on React Native, Firebase, REST APIs, and expressive visual tools like Framer. My work blends data, code, and design to create things that actually work (and look good doing it).</p>
+        <h3>Tech Stack</h3>
+        <p>React Native, Firebase, HTML/CSS, Framer, REST APIs, Python, Git, Shopify, BeautifulSoup</p>
+        <h3>Contact</h3>
+        <p>Email: your@email.com<br>
+        LinkedIn: <a href="#" tabindex="-1">your LinkedIn</a><br>
+        GitHub: <a href="#" tabindex="-1">your GitHub</a></p>
+        <div style="margin-top: 1rem; font-size: 0.85rem; opacity: 0.75;">© 2025 Vitus Clausen</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="taskbar">
+    <div class="taskbar-icon" data-window="window-projects" title="Projects">PRJ</div>
+    <div class="taskbar-icon" data-window="window-terminal" title="Terminal">TER</div>
+    <div class="taskbar-icon" data-window="window-about" title="About">ABT</div>
+  </div>
+
+  <div class="monkey-mascot" id="monkeyMascot" aria-label="Monkey mascot"></div>
+  <div class="tooltip" id="mascotTooltip" role="tooltip"></div>
+
   <script>
+    // Dark mode toggle
     function toggleDarkMode() {
       const body = document.body;
       const toggleBtn = document.getElementById('modeToggle');
       body.classList.toggle('dark-mode');
       toggleBtn.textContent = body.classList.contains('dark-mode') ? '☀️' : '🌙';
     }
+    document.getElementById('modeToggle').addEventListener('click', toggleDarkMode);
+
+    // Draggable windows
+    const windows = document.querySelectorAll('.window');
+    let zIndexCounter = 20;
+
+    windows.forEach(win => {
+      const header = win.querySelector('.window-header');
+      header.style.userSelect = 'none';
+
+      header.addEventListener('mousedown', dragMouseDown);
+
+      function dragMouseDown(e) {
+        e.preventDefault();
+        bringToFront(win);
+        let pos3 = e.clientX;
+        let pos4 = e.clientY;
+
+        document.onmouseup = closeDragElement;
+        document.onmousemove = elementDrag;
+
+        function elementDrag(e) {
+          e.preventDefault();
+          let pos1 = pos3 - e.clientX;
+          let pos2 = pos4 - e.clientY;
+          pos3 = e.clientX;
+          pos4 = e.clientY;
+          let newTop = win.offsetTop - pos2;
+          let newLeft = win.offsetLeft - pos1;
+
+          // Keep window inside viewport boundaries
+          const desktop = document.getElementById('desktop');
+          const desktopRect = desktop.getBoundingClientRect();
+          const winRect = win.getBoundingClientRect();
+
+          if(newTop < 0) newTop = 0;
+          if(newLeft < 0) newLeft = 0;
+          if(newTop + winRect.height > desktopRect.height) newTop = desktopRect.height - winRect.height;
+          if(newLeft + winRect.width > desktopRect.width) newLeft = desktopRect.width - winRect.width;
+
+          win.style.top = newTop + "px";
+          win.style.left = newLeft + "px";
+        }
+
+        function closeDragElement() {
+          document.onmouseup = null;
+          document.onmousemove = null;
+        }
+      }
+
+      // Bring window to front on click
+      win.addEventListener('mousedown', () => {
+        bringToFront(win);
+      });
+    });
+
+    function bringToFront(win) {
+      zIndexCounter++;
+      win.style.zIndex = zIndexCounter;
+    }
+
+    // Taskbar icon click to toggle windows
+    const taskbarIcons = document.querySelectorAll('.taskbar-icon');
+    taskbarIcons.forEach(icon => {
+      icon.addEventListener('click', () => {
+        const windowId = icon.getAttribute('data-window');
+        const win = document.getElementById(windowId);
+        if (win.style.display === 'none' || getComputedStyle(win).display === 'none') {
+          win.style.display = 'flex';
+          bringToFront(win);
+        } else {
+          // If visible, toggle minimized (hide)
+          win.style.display = 'none';
+        }
+      });
+    });
+
+    // Monkey mascot tooltip messages cycling
+    const mascot = document.getElementById('monkeyMascot');
+    const tooltip = document.getElementById('mascotTooltip');
+    const messages = [
+      "Keep calm and code on! 🐵",
+      "Did you know? React Native powers many apps!",
+      "Tip: Use meaningful commit messages.",
+      "Fun fact: Monkeys love bananas!",
+      "Stay curious and keep learning.",
+      "Need help? Check out the docs!",
+      "Debugging is like being a detective.",
+      "Remember to take breaks!",
+      "Coffee fuels great code.",
+      "Happy coding from Vitus!"
+    ];
+    let msgIndex = 0;
+
+    function showTooltip() {
+      tooltip.textContent = messages[msgIndex];
+      tooltip.classList.add('visible');
+      setTimeout(() => {
+        tooltip.classList.remove('visible');
+      }, 4000);
+      msgIndex = (msgIndex + 1) % messages.length;
+    }
+
+    // Show tooltip every 6 seconds
+    showTooltip();
+    setInterval(showTooltip, 6000);
+
   </script>
 </body>
 </html>
