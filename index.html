@@ -3,41 +3,157 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Your Name | Developer Portfolio</title>
+  <title>Vitus Clausen | Developer Portfolio</title>
   <style>
-    body { font-family: Arial, sans-serif; max-width: 800px; margin: 2rem auto; padding: 0 1rem; line-height: 1.6; color: #222; }
-    h1, h2 { color: #111; }
-    a { color: #0066ff; text-decoration: none; }
-    .project { margin-bottom: 2rem; }
+    :root {
+      --bg-light: #f9f9fb;
+      --text-light: #1a1a1a;
+      --bg-dark: #121212;
+      --text-dark: #f5f5f5;
+      --card-light: white;
+      --card-dark: #1e1e1e;
+    }
+
+    body {
+      margin: 0;
+      padding: 2rem;
+      font-family: 'Helvetica Neue', Helvetica, sans-serif;
+      font-weight: bold;
+      background-color: var(--bg-light);
+      color: var(--text-light);
+      line-height: 1.7;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .dark-mode {
+      background-color: var(--bg-dark);
+      color: var(--text-dark);
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    h2 {
+      margin-top: 3rem;
+      font-size: 1.5rem;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 0.25rem;
+    }
+
+    .intro {
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+    }
+
+    .project {
+      margin-bottom: 2.5rem;
+      background: var(--card-light);
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.05);
+      transition: transform 0.2s ease, background-color 0.3s ease;
+    }
+
+    .dark-mode .project {
+      background: var(--card-dark);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    }
+
+    .project:hover {
+      transform: translateY(-4px);
+    }
+
+    .project h3 {
+      margin-top: 0;
+      font-size: 1.2rem;
+    }
+
+    .project p {
+      margin: 0.5rem 0;
+    }
+
+    a {
+      color: #0066ff;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .footer {
+      margin-top: 3rem;
+      font-size: 0.9rem;
+      opacity: 0.7;
+    }
+
+    .toggle-btn {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      background: #eee;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .dark-mode .toggle-btn {
+      background: #444;
+      color: white;
+    }
   </style>
 </head>
 <body>
+  <button class="toggle-btn" onclick="toggleDarkMode()">Toggle Dark Mode</button>
 
-  <h1>Vitus Clausen — Developer</h1>
-  <p>I build fast, clean, and functional web/mobile projects. I'm currently focused on React Native, Firebase, API integrations, and Framer-based design systems. Whether it’s a slick front-end or a no-nonsense backend hook-up, I get it done.</p>
+  <div class="container">
+    <h1>Vitus Clausen — Developer</h1>
+    <p class="intro">I build clean, fast, and thoughtful digital experiences — from front-end UI to backend logic. I'm focused on React Native, Firebase, REST APIs, and expressive visual tools like Framer. My work blends data, code, and design to create things that actually work (and look good doing it).</p>
 
-  <h2>Projects</h2>
+    <h2>Projects</h2>
 
-  <div class="project">
-    <h3>TennisMenace</h3>
-    <p>End-to-end platform built for hardcore tennis bettors. Features dynamic player ratings, real-time match predictions, a proprietary “Menace Index,” and animated frontend built in Framer + Firebase backend. <br><a href="#">Live demo coming soon</a></p>
+    <div class="project">
+      <h3>TennisMenace</h3>
+      <p>A full-stack platform for serious tennis bettors. Includes player form analysis, Menace Index scoring, ATP/WTA tracking, and a sharp front-end built in Framer, backed by Firebase.</p>
+      <a href="https://tmtennis.blog" target="_blank">Visit the TM Blog</a>
+    </div>
+
+    <div class="project">
+      <h3>Wimbledon Scraper</h3>
+      <p>Python + BeautifulSoup script that scrapes live forecasts from Tennis Abstract and outputs JSON files for use in custom dashboards. Modular, fast, and CLI-friendly.</p>
+      <a href="#">GitHub repo (private for now)</a>
+    </div>
+
+    <div class="project">
+      <h3>TM Premium UI</h3>
+      <p>High-contrast premium section with glowing confidence meter, animated blur previews, and tight vertical layout. All built with hand-tuned HTML/CSS for maximum control and performance.</p>
+      <a href="#">Preview coming soon</a>
+    </div>
+
+    <h2>Tech Stack</h2>
+    <p>React Native, Firebase, HTML/CSS, Framer, REST APIs, Python, Git, Shopify, BeautifulSoup</p>
+
+    <h2>Contact</h2>
+    <p>Email: your@email.com<br>
+    LinkedIn: <a href="#">your LinkedIn</a><br>
+    GitHub: <a href="#">your GitHub</a></p>
+
+    <div class="footer">© 2025 Vitus Clausen</div>
   </div>
 
-  <div class="project">
-    <h3>Wimbledon Scraper</h3>
-    <p>Python + BeautifulSoup script that scrapes live forecast data from Tennis Abstract and outputs JSON files for use in betting dashboards. CLI-ready, modular, and easy to expand. <br><a href="#">GitHub repo (private for now)</a></p>
-  </div>
-
-  <div class="project">
-    <h3>TM Premium UI</h3>
-    <p>Stylized premium landing section coded in pure HTML/CSS. Features animated confidence meter, blur-based content previews, and minimal vertical space design optimized for mobile and desktop. <br><a href="#">Preview coming soon</a></p>
-  </div>
-
-  <h2>Skills</h2>
-  <p>React Native, Firebase, Framer, HTML/CSS, JS, REST APIs, Python (scraping & data wrangling), Git, Shopify, Wordpress</p>
-
-  <h2>Contact</h2>
-  <p>Email: yourname@email.com <br> LinkedIn: <a href="#">your LinkedIn</a> <br> GitHub: <a href="#">your GitHub</a></p>
-
+  <script>
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark-mode');
+    }
+  </script>
 </body>
 </html>
