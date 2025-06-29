@@ -6,109 +6,188 @@
   <title>Vitus Clausen | Developer Portfolio</title>
   <style>
     :root {
-      --bg-light: #f9f9fb;
-      --text-light: #1a1a1a;
-      --bg-dark: #121212;
-      --text-dark: #f5f5f5;
-      --card-light: white;
-      --card-dark: #1e1e1e;
+      --bg-light-start: #eef2f3;
+      --bg-light-end: #8e9eab;
+      --text-light: #2c3e50;
+      --bg-dark-start: #141e30;
+      --bg-dark-end: #243b55;
+      --text-dark: #ecf0f1;
+      --card-light: #ffffff;
+      --card-dark: #1f2a40;
+      --primary-color: #4a90e2;
+      --shadow-light: rgba(74, 144, 226, 0.2);
+      --shadow-dark: rgba(0, 0, 0, 0.7);
+      --font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
     }
 
     body {
       margin: 0;
-      padding: 2rem;
-      font-family: 'Helvetica Neue', Helvetica, sans-serif;
-      font-weight: bold;
-      background-color: var(--bg-light);
+      padding: 3rem 2rem;
+      font-family: var(--font-family);
+      font-weight: 500;
+      background: linear-gradient(135deg, var(--bg-light-start), var(--bg-light-end));
       color: var(--text-light);
-      line-height: 1.7;
-      transition: background-color 0.3s ease, color 0.3s ease;
+      line-height: 1.75;
+      letter-spacing: 0.02em;
+      transition: background 0.5s ease, color 0.5s ease;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
     }
 
     .dark-mode {
-      background-color: var(--bg-dark);
+      background: linear-gradient(135deg, var(--bg-dark-start), var(--bg-dark-end));
       color: var(--text-dark);
     }
 
     .container {
-      max-width: 800px;
-      margin: 0 auto;
+      max-width: 850px;
+      width: 100%;
+      font-family: var(--font-family);
+      font-weight: 500;
+      padding: 0 1rem;
     }
 
     h1 {
-      font-size: 2.5rem;
-      margin-bottom: 0.5rem;
+      font-size: 3rem;
+      margin-bottom: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      line-height: 1.1;
+      color: inherit;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.1);
     }
 
     h2 {
-      margin-top: 3rem;
-      font-size: 1.5rem;
-      border-bottom: 1px solid #ddd;
-      padding-bottom: 0.25rem;
+      margin-top: 3.5rem;
+      font-size: 1.75rem;
+      border-bottom: 2px solid var(--primary-color);
+      padding-bottom: 0.4rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      color: inherit;
+      transition: border-color 0.3s ease;
     }
 
     .intro {
-      font-size: 1.1rem;
-      margin-bottom: 2rem;
+      font-size: 1.2rem;
+      margin-bottom: 2.5rem;
+      font-weight: 400;
+      color: inherit;
+      max-width: 700px;
+      line-height: 1.8;
     }
 
     .project {
-      margin-bottom: 2.5rem;
+      margin-bottom: 3rem;
       background: var(--card-light);
-      padding: 1.5rem;
-      border-radius: 12px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.05);
-      transition: transform 0.2s ease, background-color 0.3s ease;
+      padding: 2rem 2.5rem;
+      border-radius: 16px;
+      box-shadow: 0 12px 24px var(--shadow-light);
+      transition: transform 0.3s cubic-bezier(0.4,0,0.2,1), box-shadow 0.3s ease, background-color 0.4s ease;
+      font-weight: 500;
+      color: var(--text-light);
+      cursor: default;
     }
 
     .dark-mode .project {
       background: var(--card-dark);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+      box-shadow: 0 12px 30px var(--shadow-dark);
+      color: var(--text-dark);
     }
 
     .project:hover {
-      transform: translateY(-4px);
+      transform: translateY(-6px);
+      box-shadow: 0 20px 40px var(--shadow-light);
+    }
+
+    .dark-mode .project:hover {
+      box-shadow: 0 20px 45px var(--shadow-dark);
     }
 
     .project h3 {
       margin-top: 0;
-      font-size: 1.2rem;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: inherit;
+      letter-spacing: 0.02em;
+      margin-bottom: 0.6rem;
+      user-select: none;
     }
 
     .project p {
-      margin: 0.5rem 0;
+      margin: 0.6rem 0 1.2rem;
+      font-weight: 400;
+      font-size: 1rem;
+      color: inherit;
+      line-height: 1.6;
     }
 
     a {
-      color: #0066ff;
+      color: var(--primary-color);
       text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      margin-right: 1.5rem;
+      transition: color 0.3s ease;
     }
 
     a:hover {
       text-decoration: underline;
+      color: #357ABD;
     }
 
     .footer {
-      margin-top: 3rem;
-      font-size: 0.9rem;
-      opacity: 0.7;
+      margin-top: 4rem;
+      font-size: 0.95rem;
+      opacity: 0.75;
+      font-weight: 400;
+      color: inherit;
+      text-align: center;
+      user-select: none;
     }
 
     .toggle-btn {
       position: fixed;
-      top: 1rem;
-      right: 1rem;
-      background: #eee;
+      top: 1.25rem;
+      right: 1.25rem;
+      background: #ffffffcc;
       border: none;
-      padding: 0.5rem 1rem;
-      border-radius: 6px;
+      padding: 0.6rem 1.2rem;
+      border-radius: 30px;
       cursor: pointer;
-      font-weight: bold;
+      font-weight: 600;
+      font-family: var(--font-family);
+      box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
+      color: var(--primary-color);
+      font-size: 1rem;
+      letter-spacing: 0.03em;
+      transition: background 0.4s ease, color 0.4s ease, box-shadow 0.4s ease;
+      user-select: none;
+      backdrop-filter: blur(10px);
+    }
+
+    .toggle-btn:hover {
+      background: var(--primary-color);
+      color: white;
+      box-shadow: 0 6px 20px rgba(74, 144, 226, 0.6);
     }
 
     .dark-mode .toggle-btn {
-      background: #444;
+      background: #2c3e50cc;
+      color: #a9c9ff;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.6);
+    }
+
+    .dark-mode .toggle-btn:hover {
+      background: #4a90e2;
       color: white;
+      box-shadow: 0 6px 22px rgba(74, 144, 226, 0.8);
     }
   </style>
 </head>
